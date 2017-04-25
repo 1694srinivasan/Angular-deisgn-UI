@@ -1,0 +1,132 @@
+<div nd-controller="tablectrl">
+	<md-toolbar layout="row" style="background-color: #1DABB8;">
+		<div layout="row" layout-align="start center">
+			<a ng-click="toggleLeft()" class="md-raised fa fa-bars" style="color: #ffffff;padding-left:20px;"></a>
+			<a ng-click="pilot()" class="md-toolbar-tools" style="color: #ffffff;">Pilot</a>
+		</div>
+		<span flex ></span>
+		<div layout="row" layout-align="end center">
+		    <md-menu>
+	      		<a class="dropbtn" href="#" aria-label="Open menu with custom trigger" ng-mouseenter="$mdMenu.open()" style="color: #ffffff;padding-right: 30px;">Username&nbsp;<span class="fa fa-user"></span></a>
+	    	</md-menu>
+		</div>	
+	</md-toolbar>
+	<div>
+		<section layout="row" flex="">
+		    <md-sidenav class="md-sidenav-left" md-component-id="left" md-disable-backdrop="" md-whiteframe="4" style="background-color: #3E4651;color: #ffffff;width: 250px;">
+		      	<md-toolbar class="md-theme-indigo" style="background-color: #1DABB8;">
+		      		<div layout="row" layout-align="start center">
+		      			<h1 class="md-toolbar-tools">Pilot Options</h1>
+		      			<a class="md-accent glyphicon glyphicon-remove-sign" ng-click="toggleLeft()" style="color: #ffffff;padding-right: 20px;"></a>
+		      		</div>	
+		      	</md-toolbar>
+		      	<div layout="row" layout-align="start center">
+				    <md-menu style="padding-left: 20px;">
+			      		<div layout="column" layout-align="center center">
+				      		<md-button class="sidenavbutton">
+				      			<h4><a class="fa fa-tachometer dropbtn" ng-click="dash()" style="color: #ffffff;">&nbsp;&nbsp;Dashboard</a></h4>
+				      		</md-button>
+			      		</div>
+			      		<div layout="column" layout-align="end center">
+				      		<md-button class="sidenavbutton">
+				      			<h4><a class="fa fa-pencil-square-o dropbtn" ng-click="ui()" style="color: #ffffff;">&nbsp;&nbsp;UI Elements</a></h4>
+				      		</md-button>
+			      		</div>
+			      		<div layout="column" layout-align="end center">
+				      		<md-button class="sidenavbutton">
+				      			<h4><a class="fa fa-pie-chart dropbtn" ng-click="chart()" style="color: #ffffff;">&nbsp;&nbsp;Charts</a></h4>
+				      		</md-button>
+			      		</div>
+			      		<div layout="column" layout-align="end center">
+				      		<md-button class="sidenavbutton">
+				      			<h4><a class="fa fa-table dropbtn" ng-click="table()" style="color: #ffffff;">&nbsp;&nbsp;Tables</a></h4>
+				      		</md-button>
+			      		</div>
+			    	</md-menu>
+				</div>
+		    </md-sidenav>
+		    <md-content flex="" layout-padding="">
+	      		<div layout="column" class="col-sm-6 ">
+		        	<md-whiteframe class="md-whiteframe-4dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center" style="padding-top: 30px;padding-bottom: 30px;">
+				    	<table class="table table-striped" datatable="ng" dt-options="dtOptions">
+						    <thead>
+						      <tr>
+						        <th>S.no</th>
+						        <th>Laptop Name</th>
+						        <th>Users</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+								<tr ng-repeat=" x in userdata">
+									<td>{{ $index + 1 }}</td>
+									<td>{{ x.product_name }}</td>
+									<td>{{ x.count }}</td>
+								</tr>
+							</tbody>
+			  			</table>
+					</md-whiteframe>
+		      	</div>
+		      	<div layout="column" class="col-sm-6 ">
+		        	<md-whiteframe class="md-whiteframe-4dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center" style="padding-top: 30px;padding-bottom: 30px;">
+				   		<table class="table table-striped" datatable="ng" dt-options="dtOptions">
+						    <thead>
+						      <tr>
+						        <th>S.no</th>
+						        <th>City</th>
+						        <th>Temperature</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+								<tr ng-repeat=" x in temp_data" >
+									<td>{{ $index + 1 }}</td>
+									<td>{{ x.city_name }}</td>
+									<td>{{ x.temprature }}</td>
+								</tr>
+							</tbody>
+  						</table>
+					</md-whiteframe>
+		      	</div>
+		      	<div layout="column" class="col-sm-6 ">
+		        	<md-whiteframe class="md-whiteframe-4dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center" style="padding-top: 30px;padding-bottom: 30px;">
+				    	<table class="table table-striped" datatable="ng" dt-options="dtOptions">
+						    <thead>
+						      <tr>
+						        <th>S.no</th>
+						        <th>Laptop Name</th>
+						        <th>Users</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+								<tr ng-repeat=" x in userdata">
+									<td>{{ $index + 1 }}</td>
+									<td>{{ x.product_name }}</td>
+									<td>{{ x.count }}</td>
+								</tr>
+							</tbody>
+			  			</table>
+					</md-whiteframe>
+		      	</div>
+		      	<div layout="column" class="col-sm-6 ">
+		        	<md-whiteframe class="md-whiteframe-4dp" flex-sm="45" flex-gt-sm="35" flex-gt-md="25" layout layout-align="center center" style="padding-top: 30px;padding-bottom: 30px;">
+				    	<table class="table table-striped" datatable="ng" dt-options="dtOptions">
+						    <thead>
+						      <tr>
+						        <th>S.no</th>
+						        <th>City</th>
+						        <th>Temperature</th>
+						      </tr>
+						    </thead>
+						    <tbody>
+								<tr ng-repeat=" x in temp_data" >
+									<td>{{ $index + 1 }}</td>
+									<td>{{ x.city_name }}</td>
+									<td>{{ x.temprature }}</td>
+								</tr>
+							</tbody>
+  						</table>
+					</md-whiteframe>
+		      	</div>
+		    </md-content>
+	    </section>
+	</div>
+</div>
