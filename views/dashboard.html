@@ -7,7 +7,7 @@
 		<span flex ></span>
 		<div layout="row" layout-align="end center">
 		    <md-menu>
-	      		<a class="dropbtn" href="#" aria-label="Open menu with custom trigger" ng-mouseenter="$mdMenu.open()" style="color: #ffffff;padding-right: 30px;">Username&nbsp;<span class="fa fa-user"></span></a>
+	      		<a class="dropbtn" ng-click="user()" aria-label="Open menu with custom trigger" ng-mouseenter="$mdMenu.open()" style="color: #ffffff;padding-right: 30px;">{{ user }}&nbsp;<span class="fa fa-user"></span></a>
 	    	</md-menu>
 		</div>	
 	</md-toolbar>
@@ -22,24 +22,29 @@
 		      	</md-toolbar>
 		      	<div layout="row" layout-align="start center">
 				    <md-menu style="padding-left: 20px;">
-			      		<div layout="column" layout-align="center center">
+			      		<div layout="column" layout-align="start start">
 				      		<md-button class="sidenavbutton">
 				      			<h4><a class="fa fa-tachometer dropbtn" ng-click="dash()" style="color: #ffffff;">&nbsp;&nbsp;Dashboard</a></h4>
 				      		</md-button>
 			      		</div>
-			      		<div layout="column" layout-align="end center">
+			      		<div layout="column" layout-align="start start">
 				      		<md-button class="sidenavbutton">
 				      			<h4><a class="fa fa-pencil-square-o dropbtn" ng-click="ui()" style="color: #ffffff;">&nbsp;&nbsp;UI Elements</a></h4>
 				      		</md-button>
 			      		</div>
-			      		<div layout="column" layout-align="end center">
+			      		<div layout="column" layout-align="start start">
 				      		<md-button class="sidenavbutton">
 				      			<h4><a class="fa fa-pie-chart dropbtn" ng-click="chart()" style="color: #ffffff;">&nbsp;&nbsp;Charts</a></h4>
 				      		</md-button>
 			      		</div>
-			      		<div layout="column" layout-align="end center">
+			      		<div layout="column" layout-align="start start">
 				      		<md-button class="sidenavbutton">
 				      			<h4><a class="fa fa-table dropbtn" ng-click="table()" style="color: #ffffff;">&nbsp;&nbsp;Tables</a></h4>
+				      		</md-button>
+			      		</div>
+			      		<div layout="column" layout-align="start start">
+				      		<md-button class="sidenavbutton">
+				      			<h4><a class="fa fa-sign-out dropbtn" ng-click="logout()" style="color: #ffffff;">&nbsp;&nbsp;Logout</a></h4>
 				      		</md-button>
 			      		</div>
 			    	</md-menu>

@@ -1,4 +1,4 @@
-var app = angular.module('UIApp' , ['ngRoute' , 'ngMaterial' , 'datatables'])
+var app = angular.module('UIApp' , ['ngRoute' , 'ngMaterial' , 'datatables','ngAnimate','ngAria','ngMessages'])
 app.config(function($mdIconProvider , $mdThemingProvider , $mdAriaProvider){
 		$mdThemingProvider.theme('default')
 		.primaryPalette('green')
@@ -9,6 +9,10 @@ app.config(function($mdIconProvider , $mdThemingProvider , $mdAriaProvider){
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
+        templateUrl : "views/login.html",
+        controller: 'loginctrl',
+    })
+    .when("/dashboard", {
         templateUrl : "views/dashboard.html",
         controller: 'dashboardctrl',
     })
@@ -24,12 +28,51 @@ app.config(function($routeProvider) {
     	templateUrl : "views/table.html",
     	controller : 'tablectrl',
     })
+    .when("/logout",{
+    	templateUrl : "views/logout.html",
+    	controller: 'logoutctrl',
+    })
     .otherwise({
     	redirectTo : '/'
     });
 });
 
+app.controller('loginctrl', function($scope, $http , $location ,$rootScope) {
+	$scope.SendData = function() {
+	headers = {
+	   'Content-Type': 'application/x-www-form-urlencoded',
+	 },
+	$http({method:'POST', url:'https://dtapi.herokuapp.com/api/login/', data:{'email': $scope.email , 'password': $scope.password}, header:headers}).
+	then(function successCallback(response) {
+		$scope.success = response.data.email;
+		$rootScope.loggedIn = true;
+		$rootScope.success = $scope.email;
+		$location.path('/dashboard');
+	 },function errorCallback(response) {
+	 	console.log(response.data);
+	 	if(response.data.non_field_errors){
+	 		$scope.error = response.data.non_field_errors[0];
+	 	}if(response.data.email == "This field is required."){
+	 		
+	 		$scope.blankemail = "Email or password field is empty";
+	 	}if(response.data.password){
+	 		$scope.blankemail = "Email or password field is empty";
+	 	}if(response.data.email == "Enter a valid email address."){
+	 		$scope.invalidemail = "Enter a Valid Email";
+	 	}
+	 });
+	}	
+});
+
+app.controller('logoutctrl', function($scope, $http , $location ,$rootScope) {
+	$scope.log = function() {
+		$location.path('/');
+	}	
+});
+
 app.controller('dashboardctrl', function($scope, $http , $location ,$rootScope,$mdSidenav) {
+
+	$scope.user = $rootScope.success;
 	$scope.toggleLeft = buildToggler('left');
     $scope.toggleRight = buildToggler('right');
     function buildToggler(componentId) {
@@ -65,9 +108,13 @@ app.controller('dashboardctrl', function($scope, $http , $location ,$rootScope,$
 	$scope.table1 = function(){
 		$location.path('/table');
 	}
+	$scope.logout = function(){
+		$location.path('/logout');
+	}
 });
 
 app.controller('uictrl', function($scope, $http , $location ,$rootScope,$mdSidenav) {
+	$scope.user = $rootScope.success;
 	$scope.toggleLeft = buildToggler('left');
     $scope.toggleRight = buildToggler('right');
     function buildToggler(componentId) {
@@ -89,10 +136,14 @@ app.controller('uictrl', function($scope, $http , $location ,$rootScope,$mdSiden
 	}
 	$scope.table = function(){
 		$location.path('/table');
+	}
+	$scope.logout = function(){
+		$location.path('/logout');
 	}
 });
 
 app.controller('chartctrl', function($scope, $http , $location ,$rootScope,$mdSidenav) {
+	$scope.user = $rootScope.success;
 	$scope.toggleLeft = buildToggler('left');
     $scope.toggleRight = buildToggler('right');
     function buildToggler(componentId) {
@@ -114,6 +165,9 @@ app.controller('chartctrl', function($scope, $http , $location ,$rootScope,$mdSi
 	}
 	$scope.table = function(){
 		$location.path('/table');
+	}
+	$scope.logout = function(){
+		$location.path('/logout');
 	}
 
 	Highcharts.chart('container1', {
@@ -484,6 +538,7 @@ Math.easeOutBounce = function (pos) {
 });
 
 app.controller('tablectrl', function($scope, $http , $location ,$rootScope,$mdSidenav) {
+	$scope.user = $rootScope.success;
 	$scope.toggleLeft = buildToggler('left');
     $scope.toggleRight = buildToggler('right');
     function buildToggler(componentId) {
@@ -505,6 +560,9 @@ app.controller('tablectrl', function($scope, $http , $location ,$rootScope,$mdSi
 	}
 	$scope.table = function(){
 		$location.path('/table');
+	}
+	$scope.logout = function(){
+		$location.path('/logout');
 	}
 
 	$http({method: 'GET',url: 'https://angapi.herokuapp.com/temprature/'}).
