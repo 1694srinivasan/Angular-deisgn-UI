@@ -1,0 +1,78 @@
+<div ng-controller="dynoctrl">
+	<md-toolbar layout="row" style="background-color: #1DABB8;">
+		<div layout="row" layout-align="start center">
+			<a ng-click="toggleLeft()" class="md-raised fa fa-bars" style="color: #ffffff;padding-left:20px;"></a>
+			<a ng-click="pilot()" class="md-toolbar-tools" style="color: #ffffff;">Angular Pilot</a>
+		</div>
+		<div layout="row" layout-align="end end">
+		    <md-menu md-position-mode="target-left target">
+	      		<a class="dropbtn" href="#" aria-label="Open menu with custom trigger" ng-mouseenter="$mdMenu.open()" style="color: #ffffff;padding-right: 30px;cursor:pointer;">Widgets&nbsp;<span class="fa fa-caret-down"></span></a>
+	      		<md-menu-content ng-mouseleave="$mdMenu.close()" style="width: 150px;background-color: #ffffff">
+	      		<div layout="column" layout-align="end center">
+		      		<md-button class="sidenavbutton" ng-repeat="x in widgettypedropdown">
+		      			<div ng-if="x.enable == true">
+		     				<center><label><input type="checkbox" id="id_{{ x.id}}" ng-click="closecheck($index,x.id,x.enable)" checked="checked" style="cursor:pointer;">&nbsp;{{ x.widget_name}}</label></center>
+		     			</div>
+		     			<div ng-if="x.enable == false">
+		     				<center><label><input type="checkbox" id="id_{{ x.id}}" ng-click="closecheck($index,x.id,x.enable)" style="cursor:pointer;">&nbsp;{{ x.widget_name}}</label></center>
+		     			</div>	
+		      		</md-button>
+	      		</div>
+	    	</md-menu>
+		</div>
+		<span flex ></span>
+		<div layout="column" layout-align="end end">
+		    <md-menu md-position-mode="target-left target">
+	      		<a class="dropbtn" href="#" aria-label="Open menu with custom trigger" ng-mouseenter="$mdMenu.open()" style="color: #ffffff;padding-right: 30px;cursor:pointer;">{{ user }}&nbsp;<span class="fa fa-caret-down"></span></a>
+	      		<md-menu-content ng-mouseleave="$mdMenu.close()" style="width: 150px;background-color: #ffffff">
+	      		<div layout="column" layout-align="end center">
+		      		<md-button class="sidenavbutton">
+		      			<a class="fa fa-user dropbtn" ng-click="dyno()" style="color: #000000;">&nbsp;Dynamic Widgets</a>
+		      		</md-button>
+		      		<md-button class="sidenavbutton">
+		      			<a class="fa fa-gear dropbtn" ng-click="settings()" style="color: #000000;">&nbsp;Settings</a>
+		      		</md-button>
+		      		<md-button class="sidenavbutton">
+		      			<a class="fa fa-sign-out dropbtn" ng-click="logout()" style="color: #000000;">&nbsp;Logout</a>
+		      		</md-button>
+	      		</div>
+	    	</md-menu>
+		</div>	
+	</md-toolbar>
+	<div>
+		<section layout="row" flex="">
+		    <md-content flex="" layout-padding="">
+		      	<div layout="column" class="col-sm-6" ng-repeat="x in widgettypedata">
+					<md-toolbar layout="row" layout-align="end center">
+						<h1 class="md-toolbar-tools">{{x.widget_name}}</h1>
+							<md-select name="charttype" ng-model="charttype">
+								<div ng-repeat="t in wtype">
+									<md-option  value="{{t}}" ng-if="x.widget_type == t.id" ng-click="type($index,x.id,t.id)" selected>{{t.type_name}}</md-option>
+									<md-option  value="{{t}}" ng-if="x.widget_type != t.id" ng-click="type($index,x.id,t.id)">{{t.type_name}}</md-option>
+								</div>
+					        </md-select>
+						<a ng-click="close($index,x.id)" class="md-raised fa fa-times" style="padding-right:20px;cursor:pointer;color: #ffffff"></a>
+					</md-toolbar>
+					<md-whiteframe class="md-whiteframe-5dp" flex-sm="80" flex-gt-sm="80" flex-gt-md="80" layout layout-align="center center">
+						<div ng-if="x.widget_name == 'widget 1'" style="padding-top: 30px;padding-bottom: 30px;">
+	  						<div id="container1">
+							</div>
+	  					</div>
+	  					<div ng-if="x.widget_name == 'widget 2'" style="padding-top: 30px;padding-bottom: 30px;">
+	  						<div id="container2">
+							</div>
+	  					</div>
+	  					<div ng-if="x.widget_name == 'widget 3'" style="padding-top: 30px;padding-bottom: 30px;">
+	  						<div id="container3">
+							</div>
+	  					</div>
+	  					<div ng-if="x.widget_name == 'widget 4'" style="padding-top: 30px;padding-bottom: 30px;">
+	  						<div id="container4">
+							</div>
+	  					</div>
+					</md-whiteframe>
+		      	</div>
+		    </md-content>
+	    </section>
+	</div>
+</div>
